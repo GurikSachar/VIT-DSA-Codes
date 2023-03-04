@@ -1,23 +1,27 @@
 #include <stdio.h>
 
-int main()
+void main()
 {
     int max = 5;
-    int pushval, popval;
+    int pushval, popval; // pushval and popval store the values which have to be pushed and those which have been popped respectively
     int stack[max], top = -1;
     int element;
     int choice = 1;
-    while (choice == 1 || choice == 2 || choice == 3 || choice == 4)
+    do
     {
         printf("**Stack menu**\n");
+        printf("Press 0 to exit program\n");
         printf("Press 1 for push operation\n");
         printf("Press 2 for pop operation\n");
         printf("Press 3 for peek operation\n");
-        printf("Press 4 to exit program\n");
+        printf("Press 4 for display elements\n");
         printf("Enter your choice: \n");
         scanf("%d", &choice);
-        if (choice == 1)
+        switch (choice)
         {
+        case 0:
+            break;
+        case 1: // push operation
             if (top == max - 1)
             {
                 printf("Stack is full\n");
@@ -28,10 +32,10 @@ int main()
                 scanf("%d", &pushval);
                 top++;
                 stack[top] = pushval;
+                printf("Value has been pushed onto stack\n");
             }
-        }
-        else if (choice == 2)
-        {
+            break;
+        case 2: // pop operation
             if (top == -1)
             {
                 printf("Stack is empty\n");
@@ -40,28 +44,29 @@ int main()
             {
                 popval = stack[top];
                 top--;
-                printf("Popped element is: %d", popval);
+                printf("Popped element is: %d\n", popval);
             }
-        }
-        else if (choice == 3)
-        {
+            break;
+        case 3: // peek operation
             if (top == -1)
             {
                 printf("Stack is empty, no elements to peek\n");
             }
             else
             {
-                printf("Element at the top is: %d", stack[top]);
+                printf("Element at the top is: %d\n", stack[top]);
             }
-        }
-        else if (choice == 4)
-        {
-            printf("Final elements in the stack are:\n");
-            for (int i = 0; i < top; i++)
+            break;
+        case 4: // display operation
+            printf("Elements in the stack are:\n");
+            for (int i = top; i >= 0; i--)
             {
                 printf("%d\n", stack[i]);
             }
             break;
+        default:
+            printf("Invalid option, enter again\n");
+            break;
         }
-    }
+    } while (choice != 0);
 }
